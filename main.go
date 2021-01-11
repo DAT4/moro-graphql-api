@@ -212,8 +212,6 @@ var schema, _ = graphql.NewSchema(
 var h = handler.New(&handler.Config{
 	Schema:     &schema,
 	Pretty:     true,
-	GraphiQL:   true,
-	Playground: true,
 })
 
 func interval(p *graphql.ResolveParams, lt string, gt string) bson.M {

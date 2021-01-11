@@ -54,17 +54,16 @@ func getEvents(filter bson.M) (events []event) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer client.Disconnect(ctx)
 	ctx, _ = context.WithTimeout(context.Background(), 10*time.Second)
 	cursor, err := client.Database("dtu").Collection("moro").Find(ctx, filter)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(filter)
 	var event event
 	for cursor.TryNext(context.Background()) {
 		cursor.Decode(&event)
 		events = append(events, event)
 	}
-	defer client.Disconnect(ctx)
 	return events
 }
