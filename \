@@ -220,6 +220,7 @@ var queryType = graphql.NewObject(
 					}
 					time := interval(&p, "timestampLT", "timestampGT")
 					if time != nil {
+						fmt.Println("HEEEEEJ")
 						filter["time"] = time
 					}
 

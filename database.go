@@ -12,21 +12,22 @@ import (
 )
 
 type event struct {
-	Title       string
-	Time       	int
-	Price       int
-	Genre       string
-	Image      string
-	Tickets     string
-	Text 		string
-	Link        string
-	Other       []string
-	Location    location
+	Title    string
+	Time     int
+	Price    int
+	Genre    string
+	Category []string
+	Image    string
+	Tickets  string
+	Text     string
+	Link     string
+	Other    []string
+	Location location
 }
 
 type location struct {
 	Address     address
-	Area 		string
+	Area        string
 	Place       string
 	Coordinates coordinates
 }
@@ -37,11 +38,11 @@ type coordinates struct {
 }
 
 type address struct {
-	Street	   	string
-	No 		   	string
-	Zip 		int
-	City       	string
-	State 		string
+	Street string
+	No     string
+	Zip    int
+	City   string
+	State  string
 }
 
 func getEvents(filter bson.M) (events []event) {
