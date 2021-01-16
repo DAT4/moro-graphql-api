@@ -18,11 +18,6 @@ var queryType = graphql.NewObject(
 						DefaultValue: nil,
 						Description:  "the title of the event",
 					},
-					"place": &graphql.ArgumentConfig{
-						Type:         graphql.String,
-						DefaultValue: nil,
-						Description:  "the name of the provider of the event",
-					},
 					"timestampLT": &graphql.ArgumentConfig{
 						Type:         graphql.Int,
 						DefaultValue: nil,
@@ -33,26 +28,6 @@ var queryType = graphql.NewObject(
 						DefaultValue: (time.Now().Unix()),
 						Description:  "Event has to be after this timestamp",
 					},
-					"genre": &graphql.ArgumentConfig{
-						Type:         graphql.String,
-						DefaultValue: nil,
-						Description:  "The genre of event NOT IMPLEMENTED",
-					},
-					"category": &graphql.ArgumentConfig{
-						Type:         graphql.String,
-						DefaultValue: nil,
-						Description:  "the category of the event",
-					},
-					"area": &graphql.ArgumentConfig{
-						Type:         graphql.String,
-						DefaultValue: nil,
-						Description:  "the area in the city of event",
-					},
-					"zip": &graphql.ArgumentConfig{
-						Type:         graphql.String,
-						DefaultValue: nil,
-						Description:  "The zip code of the location of the event",
-					},
 					"priceLT": &graphql.ArgumentConfig{
 						Type:         graphql.Int,
 						DefaultValue: nil,
@@ -62,6 +37,31 @@ var queryType = graphql.NewObject(
 						Type:         graphql.Int,
 						DefaultValue: nil,
 						Description:  "The min price of the event",
+					},
+					"category": &graphql.ArgumentConfig{
+						Type:         graphql.NewList(graphql.String),
+						DefaultValue: nil,
+						Description:  "the category of the event",
+					},
+					"area": &graphql.ArgumentConfig{
+						Type:         graphql.NewList(graphql.String),
+						DefaultValue: nil,
+						Description:  "the area in the city of event",
+					},
+					"place": &graphql.ArgumentConfig{
+						Type:         graphql.NewList(graphql.String),
+						DefaultValue: nil,
+						Description:  "the name of the provider of the event",
+					},
+					"genre": &graphql.ArgumentConfig{
+						Type:         graphql.NewList(graphql.String),
+						DefaultValue: nil,
+						Description:  "The genre of event NOT IMPLEMENTED",
+					},
+					"zip": &graphql.ArgumentConfig{
+						Type:         graphql.NewList(graphql.String),
+						DefaultValue: nil,
+						Description:  "The zip code of the location of the event",
 					},
 				},
 				Resolve:     queryResolver,

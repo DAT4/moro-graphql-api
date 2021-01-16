@@ -15,18 +15,6 @@ func queryResolver(p graphql.ResolveParams) (interface{}, error) {
 			Options: "i",
 		}
 	}
-	place, placeOk := p.Args["place"].(string)
-	if placeOk {
-		filter["location.place"] = place
-	}
-	category, categoryOk := p.Args["category"].(string)
-	if categoryOk {
-		filter["category"] = category
-	}
-	area, areaOk := p.Args["area"].(string)
-	if areaOk {
-		filter["location.area"] = area
-	}
 	price := interval(&p, "priceLT", "priceGT")
 	if price != nil {
 		filter["price"] = price
@@ -34,6 +22,26 @@ func queryResolver(p graphql.ResolveParams) (interface{}, error) {
 	time := interval(&p, "timestampLT", "timestampGT")
 	if time != nil {
 		filter["time"] = time
+	}
+	place, placeOk := p.Args["place"].([]interface{})
+	if placeOk {
+		filter["location.place"] = bson.M{"$in": place}
+	}
+	category, categoryOk := p.Args["category"].([]interface{})
+	if categoryOk {
+		filter["category"] = bson.M{"$in": category}
+	}
+	area, areaOk := p.Args["area"].([]interface{})
+	if areaOk {
+		filter["location.area"] = bson.M{"$in": area}
+	}
+	genre, genreOk := p.Args["genre"].([]interface{})
+	if genreOk {
+		filter["genre"] = bson.M{"$in": genre}
+	}
+	zip, zipOK := p.Args["zip"].([]interface{})
+	if zipOK {
+		filter["location.zip"] = bson.M{"$in": zip}
 	}
 
 	return getEvents(filter), nil
